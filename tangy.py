@@ -4,18 +4,8 @@ from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 
 from creds import OT04, OT04_PASSWORD
-#from mail_lists import TO, FROM
+from mail_lists import OFFICER_LOOKUP
 from email_text import EMAIL_TEXT
-
-officer_lookup = {
-    'Jenny': 'jennyandrews1@gmail.com',
-    'Lauren': 'lauren.lipaj@gmail.com',
-    'Rachel': 'rachelward57@aol.com',
-    'Kevin': 'kevinmlauer@gmail.com',
-    'Katie': 'katiebruhn@gmail.com',
-    'Dana': 'danapaugh@gmail.com',
-    'Sean': 'sean.dennison.osu@gmail.com',
-    'Scott': 'scott.m.meyers@gmail.com'}
 
 wkbk = xlrd.open_workbook('olentangy_2004_2014.xlsx')
 sht = wkbk.sheets()[0]
@@ -34,7 +24,7 @@ for r in range(1,sht.nrows, 20):
         if friends == ' and ':
             friends = 'We don\'t have this info from you!'
         btext += EMAIL_TEXT % (first_name, full_name, cell, parent_contact, email, addr, friends)
-        FROM = officer_lookup[sht.row(r)[0].value]
+        FROM = OFFICER_LOOKUP[sht.row(r)[0].value]
         TO = email
         if FROM not in offs:
             offs.append(FROM)
